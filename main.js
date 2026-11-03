@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const brandImages = document.querySelectorAll('.brand-img');
                 
                 // Parallax for Section 5 Images
-                const section5 = document.getElem   ('visual-thinkers');
+                const section5 = document.getElementById('visual-thinkers');
                 const sec5Images = document.querySelectorAll('.sec5-img');
                 
                 mainContent.addEventListener('scroll', () => {
