@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "npx serve -p 8080",
+    "tunnel": "npx localtunnel --port 8080"
+  },
+  "dependencies": {
+    "localtunnel": "^2.0.2"
+  }
+}
