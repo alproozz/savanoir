@@ -1037,23 +1037,29 @@ body {
     scroll-snap-align: start;
 }
 
-/* Navigasi kiri/kanan */
+/* Navigasi kiri/kanan: panah melayang di tengah tepi kiri & kanan kartu */
 .works-nav {
+    --arrow-size: 52px;
+    --card-inset: max(5%, calc((100% - 1300px) / 2));
     position: absolute;
-    right: max(5%, calc((100% - 1300px) / 2));
-    bottom: max(10px, calc(5vh - 26px));
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+    inset: 0;
     z-index: 2;
+    pointer-events: none;
+}
+
+.works-nav > * {
+    pointer-events: auto;
 }
 
 .works-counter {
+    position: absolute;
+    left: 50%;
+    bottom: max(10px, calc(5vh - 0.6rem));
+    transform: translateX(-50%);
     font-family: 'Outfit', sans-serif;
     font-size: 0.8rem;
     letter-spacing: 2px;
     color: rgba(255, 255, 255, 0.4);
-    margin-right: 0.75rem;
 }
 
 .works-current {
@@ -1061,14 +1067,18 @@ body {
 }
 
 .works-arrow {
-    width: 52px;
-    height: 52px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: var(--arrow-size);
+    height: var(--arrow-size);
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid #fff;
+    background: #fff;
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    color: #fff;
+    color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1079,8 +1089,17 @@ body {
 .works-arrow:hover:not(:disabled) {
     background: #ff0032;
     border-color: #ff0032;
+    color: #fff;
     box-shadow: 0 0 20px rgba(255, 0, 50, 0.45);
-    transform: scale(1.06);
+    transform: translateY(-50%) scale(1.06);
+}
+
+.works-prev {
+    left: calc(var(--card-inset) - var(--arrow-size) / 2);
+}
+
+.works-next {
+    right: calc(var(--card-inset) - var(--arrow-size) / 2);
 }
 
 .works-arrow:focus-visible {
@@ -1209,13 +1228,10 @@ body {
         padding: 4rem 0 6rem;
     }
     .works-nav {
-        right: 50%;
-        transform: translateX(50%);
-        bottom: 1.5rem;
+        --arrow-size: 44px;
     }
-    .works-arrow {
-        width: 46px;
-        height: 46px;
+    .works-counter {
+        bottom: 2.5rem;
     }
     .portfolio-split {
         flex-direction: column;
