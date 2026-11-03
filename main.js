@@ -135,26 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             });
                         }
                     }
-                    // Horizontal Scroll Logic for Portfolio
-                    const hScrollSection = document.querySelector('.horizontal-scroll-section');
-                    const hWrapper = document.querySelector('.horizontal-wrapper');
-                    if (hScrollSection && hWrapper) {
-                        const hRect = hScrollSection.getBoundingClientRect();
-                        // Ketika top menyentuh 0 (atau kurang), section mulai sticky
-                        if (hRect.top <= 0) {
-                            const maxScroll = hRect.height - window.innerHeight;
-                            const distanceScrolled = -hRect.top;
-                            
-                            let progress = distanceScrolled / maxScroll;
-                            if (progress < 0) progress = 0;
-                            if (progress > 1) progress = 1;
-                            
-                            const maxTranslate = hWrapper.scrollWidth - window.innerWidth;
-                            hWrapper.style.transform = `translateX(-${progress * maxTranslate}px)`;
-                        } else {
-                            hWrapper.style.transform = `translateX(0px)`;
-                        }
-                    }
                 });
 
                 // 3D Card Tilt Animation for Section 2
@@ -357,6 +337,38 @@ document.addEventListener("DOMContentLoaded", () => {
             if (toast) toast.classList.remove('show');
         });
     }
+});
+
+// Portfolio Carousel Navigation (geser kiri/kanan)
+document.addEventListener("DOMContentLoaded", () => {
+    const wrapper = document.querySelector('.horizontal-wrapper');
+    const prevBtn = document.querySelector('.works-prev');
+    const nextBtn = document.querySelector('.works-next');
+    const currentEl = document.querySelector('.works-current');
+    if (!wrapper || !prevBtn || !nextBtn) return;
+
+    const items = wrapper.querySelectorAll('.portfolio-item');
+
+    const updateNav = () => {
+        // Section masih tersembunyi di balik intro
+        if (wrapper.clientWidth === 0) return;
+        const index = Math.round(wrapper.scrollLeft / wrapper.clientWidth);
+        const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+        prevBtn.disabled = wrapper.scrollLeft <= 5;
+        nextBtn.disabled = wrapper.scrollLeft >= maxScroll - 5;
+        if (currentEl) currentEl.textContent = String(Math.min(index + 1, items.length)).padStart(2, '0');
+    };
+
+    prevBtn.addEventListener('click', () => {
+        wrapper.scrollBy({ left: -wrapper.clientWidth, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+        wrapper.scrollBy({ left: wrapper.clientWidth, behavior: 'smooth' });
+    });
+
+    wrapper.addEventListener('scroll', updateNav, { passive: true });
+    new ResizeObserver(updateNav).observe(wrapper);
 });
 
 // FAQ Accordion Animation

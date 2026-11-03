@@ -998,34 +998,99 @@ body {
    HORIZONTAL SCROLL SECTION
 ================================= */
 .horizontal-scroll-section {
-    height: 300vh;
     position: relative;
     background-color: #000;
     z-index: 10;
 }
 
 .sticky-container {
-    position: sticky;
-    top: 0;
+    position: relative;
     height: 100vh;
     width: 100%;
     overflow: hidden;
 }
 
+/* Digeser manual (swipe / trackpad / tombol), tidak mengikat scroll vertikal */
 .horizontal-wrapper {
     display: flex;
     height: 100%;
-    width: 300vw;
-    will-change: transform;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+}
+
+.horizontal-wrapper::-webkit-scrollbar {
+    display: none;
 }
 
 .portfolio-item {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    scroll-snap-align: start;
+}
+
+/* Navigasi kiri/kanan */
+.works-nav {
+    position: absolute;
+    right: max(5%, calc((100% - 1300px) / 2));
+    bottom: max(10px, calc(5vh - 26px));
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 2;
+}
+
+.works-counter {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-right: 0.75rem;
+}
+
+.works-current {
+    color: #fff;
+}
+
+.works-arrow {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+.works-arrow:hover:not(:disabled) {
+    background: #ff0032;
+    border-color: #ff0032;
+    box-shadow: 0 0 20px rgba(255, 0, 50, 0.45);
+    transform: scale(1.06);
+}
+
+.works-arrow:focus-visible {
+    outline: 1px solid #fff;
+    outline-offset: 3px;
+}
+
+.works-arrow:disabled {
+    opacity: 0.25;
+    cursor: default;
 }
 
 .item-1, .item-2, .item-3 { background: transparent; }
@@ -1133,9 +1198,24 @@ body {
 
 /* Portfolio Mobile Responsiveness */
 @media (max-width: 900px) {
+    .sticky-container {
+        height: auto;
+    }
+    .horizontal-wrapper {
+        align-items: flex-start;
+    }
     .portfolio-item {
         height: auto;
-        padding: 4rem 0;
+        padding: 4rem 0 6rem;
+    }
+    .works-nav {
+        right: 50%;
+        transform: translateX(50%);
+        bottom: 1.5rem;
+    }
+    .works-arrow {
+        width: 46px;
+        height: 46px;
     }
     .portfolio-split {
         flex-direction: column;
