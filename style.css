@@ -1734,6 +1734,19 @@ body {
     letter-spacing: -0.02em;
 }
 
+.packages-sub {
+    margin-top: 1.5rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.packages-sub strong {
+    color: #fff;
+    font-weight: 500;
+    border-bottom: 1px solid #ff0032;
+}
+
 /* Daftar paket: baris besar dengan garis pemisah, klik untuk detail */
 .pkg-list {
     border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -1746,7 +1759,7 @@ body {
 .pkg-summary,
 .pkg-detail-inner {
     display: grid;
-    grid-template-columns: 4rem 1.4fr 1fr 12rem 2rem;
+    grid-template-columns: 4rem 1.4fr 1fr 15rem 2rem;
     grid-template-areas: "num name target price icon";
     column-gap: 1.5rem;
 }
@@ -1789,17 +1802,46 @@ body {
     color: rgba(255, 255, 255, 0.5);
 }
 
+/* Harga: cicilan per bulan sebagai angka utama */
 .pkg-price {
     grid-area: price;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
     font-family: 'Outfit', sans-serif;
-    font-size: 1.15rem;
     text-align: right;
     white-space: nowrap;
 }
 
-.pkg-price small {
-    font-size: 0.8rem;
+.pkg-price-main {
+    font-size: 1.55rem;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+}
+
+.pkg-price-main small {
+    margin-left: 0.15rem;
+    font-size: 0.85rem;
+    font-weight: 400;
     color: rgba(255, 255, 255, 0.5);
+}
+
+.pkg-price-main .pkg-from {
+    margin: 0 0.35rem 0 0;
+    font-size: 0.75rem;
+}
+
+.pkg-price-text {
+    font-size: 1.15rem;
+}
+
+.pkg-price-sub {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #ff0032;
 }
 
 .pkg-icon {
@@ -1874,9 +1916,16 @@ body {
     color: rgba(255, 255, 255, 0.75);
 }
 
+.pkg-meta em {
+    margin-left: 0.5rem;
+    font-style: normal;
+    font-size: 0.8rem;
+    color: #ff0032;
+}
+
 .pkg-meta span {
     display: inline-block;
-    min-width: 5.5rem;
+    min-width: 7.5rem;
     font-size: 0.7rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -1923,7 +1972,9 @@ body {
         padding: 1.5rem 0;
     }
     .pkg-price {
+        align-items: flex-start;
         text-align: left;
+        margin-top: 0.4rem;
     }
     .pkg-detail-inner {
         grid-template-areas:
