@@ -371,6 +371,32 @@ document.addEventListener("DOMContentLoaded", () => {
     new ResizeObserver(updateNav).observe(wrapper);
 });
 
+// Package Rows Accordion (klik baris untuk lihat detail paket)
+document.addEventListener("DOMContentLoaded", () => {
+    const pkgRows = document.querySelectorAll('.pkg-row');
+    pkgRows.forEach(row => {
+        const summary = row.querySelector('.pkg-summary');
+        if (summary) {
+            summary.addEventListener('click', () => {
+                const isOpen = row.classList.contains('open');
+
+                // Close all others
+                pkgRows.forEach(other => {
+                    other.classList.remove('open');
+                    const otherSummary = other.querySelector('.pkg-summary');
+                    if (otherSummary) otherSummary.setAttribute('aria-expanded', 'false');
+                });
+
+                // Toggle current
+                if (!isOpen) {
+                    row.classList.add('open');
+                    summary.setAttribute('aria-expanded', 'true');
+                }
+            });
+        }
+    });
+});
+
 // FAQ Accordion Animation
 document.addEventListener("DOMContentLoaded", () => {
     const faqItems = document.querySelectorAll('.faq-item');
