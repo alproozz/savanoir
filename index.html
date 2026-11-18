@@ -154,11 +154,11 @@
             </div>
 
             <div class="sec5-bottom">
-                <img src="images/1.png" class="sec5-img s5-img-1" data-speed="0" alt="Image 01">
-                <img src="images/2.png" class="sec5-img s5-img-2" data-speed="0.35" alt="Image 02">
-                <img src="images/3.png" class="sec5-img s5-img-3" data-speed="0.7" alt="Image 03">
-                <img src="images/4.png" class="sec5-img s5-img-4" data-speed="0.35" alt="Image 04">
-                <img src="images/5.png" class="sec5-img s5-img-5" data-speed="0" alt="Image 05">
+                <div class="sec5-img s5-img-1" data-speed="0"><img src="images/1.png" alt="Image 01"></div>
+                <div class="sec5-img s5-img-2" data-speed="0.35"><img src="images/2.png" alt="Image 02"></div>
+                <div class="sec5-img s5-img-3" data-speed="0.7"><img src="images/3.png" alt="Image 03"></div>
+                <div class="sec5-img s5-img-4" data-speed="0.35"><img src="images/4.png" alt="Image 04"></div>
+                <div class="sec5-img s5-img-5" data-speed="0"><img src="images/5.png" alt="Image 05"></div>
             </div>
         </section>
 
@@ -321,89 +321,120 @@
 
         <!-- PACKAGES SECTION -->
         <section id="packages" class="packages-section">
-            <div class="packages-header">
-                <h2>Our Packages</h2>
-                <p>Pilih layanan yang paling sesuai dengan visi digital Anda.</p>
-            </div>
-            <div class="packages-grid">
-                <!-- Package 1 -->
-                <div class="package-card">
-                    <div class="package-num">01</div>
-                    <div class="package-content">
-                        <h3>Present Esensial</h3>
-                        <p class="package-desc">Target: Individu, Kreator, & Freelancer.</p>
-                        <div class="package-price">
-                            <span class="promo-price">Rp 2.750.000 <small>(Full Payment)</small></span>
-                            <span class="normal-price">Cicilan/Normal: Rp 3.000.000</span>
-                            <span class="installment-price">Rp 500.000 / bln <span>(6x)</span></span>
-                        </div>
-                        <ul class="package-features">
-                            <li>Tata Letak Responsif Kelas Atas 1 Halaman</li>
-                            <li>Link-in-Bio & Pusat Saluran Media Sosial</li>
-                            <li>Domain .com + Cloud Hosting 1 Tahun</li>
-                            <li>Form Kontak ke Email</li>
-                            <li>Pengerjaan 4–6 Hari Kerja</li>
-                        </ul>
-                        <a href="#contact-brutalist" class="btn btn-outline">Select Plan</a>
-                    </div>
+            <div class="packages-container">
+                <div class="packages-header">
+                    <span class="section-label">Paket & Investasi</span>
+                    <h2>Pilih titik awal,<br>kami sesuaikan sisanya.</h2>
                 </div>
-                <!-- Package 2 -->
-                <div class="package-card featured">
-                    <div class="package-num">02</div>
-                    <div class="package-content">
-                        <h3>Signature Showcase</h3>
-                        <p class="package-desc">Target: Eksekutif, Konsultan, Fotografer, & Kreator Interaktif.</p>
-                        <div class="package-price">
-                            <span class="promo-price">Rp 4.750.000 <small>(Full Payment)</small></span>
-                            <span class="normal-price">Cicilan/Normal: Rp 5.400.000</span>
-                            <span class="installment-price">Rp 900.000 / bln <span>(6x)</span></span>
-                        </div>
-                        <ul class="package-features">
-                            <li>Pameran Multi-Bagian / Interaktif</li>
-                            <li>Gerakan Kustom & Pengguliran Horizontal/Lengket</li>
-                            <li>Formulir Pemesanan WhatsApp + Sinkronisasi Email</li>
-                            <li>Pengaturan Profil & SEO Dasar</li>
-                            <li>Pengerjaan 7–12 Hari Kerja</li>
-                        </ul>
-                        <a href="#contact-brutalist" class="btn btn-primary">Select Plan</a>
-                    </div>
-                </div>
-                <!-- Package 3 -->
-                <div class="package-card">
-                    <div class="package-num">03</div>
-                    <div class="package-content">
-                        <h3>Enterprise Architecture</h3>
-                        <p class="package-desc">Target: Perusahaan, Lembaga, Agensi, & Organisasi.</p>
-                        <div class="package-price">
-                            <span class="promo-price">Rp 8.750.000 <small>(Full Payment)</small></span>
-                            <span class="normal-price">Cicilan/Normal: Rp 9.900.000</span>
-                            <span class="installment-price">Rp 1.650.000 / bln <span>(6x)</span></span>
-                        </div>
-                        <ul class="package-features">
-                            <li>Arsitektur Korporat Multi-Halaman</li>
-                            <li>Integrasi Form ke Google Sheets (SavanoirLeads) & Email Notifikasi</li>
-                            <li>Pengaturan Email Bisnis (contoh contact@perusahaan.com)</li>
-                            <li>SEO Teknis Tingkat Lanjut & Google Analytics</li>
-                            <li>Pengerjaan 14–20 Hari Kerja + 1 Bulan Maintenance</li>
-                        </ul>
-                        <a href="#contact-brutalist" class="btn btn-outline">Select Plan</a>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Payment Scheme Info -->
-            <div class="payment-scheme-info">
-                <h4>Rincian Skema Pembayaran</h4>
-                <div class="scheme-grid">
-                    <div class="scheme-item">
-                        <h5>Opsi 1 (Full Payment)</h5>
-                        <p>Dapatkan harga diskon eksklusif bergantung pada promo event (Gunakan kode/voucher jika ada).</p>
+                <div class="pkg-list">
+                    <!-- Package 1 -->
+                    <div class="pkg-row">
+                        <button type="button" class="pkg-summary" aria-expanded="false">
+                            <span class="pkg-num">01</span>
+                            <span class="pkg-name">Present Esensial</span>
+                            <span class="pkg-target">Individu, kreator & freelancer</span>
+                            <span class="pkg-price">Rp 2.750.000</span>
+                            <span class="pkg-icon">+</span>
+                        </button>
+                        <div class="pkg-detail">
+                            <div class="pkg-detail-inner">
+                                <ul class="pkg-features">
+                                    <li>Website satu halaman, responsif di semua perangkat</li>
+                                    <li>Halaman link-in-bio untuk semua media sosial</li>
+                                    <li>Domain .com dan cloud hosting selama 1 tahun</li>
+                                    <li>Form kontak yang terkirim ke email</li>
+                                </ul>
+                                <div class="pkg-meta">
+                                    <p><span>Durasi</span>4–6 hari kerja</p>
+                                    <p><span>Cicilan</span>Rp 500.000 × 6 bulan</p>
+                                    <a href="#contact-brutalist" class="pkg-cta">Pilih paket ini &#8599;</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="scheme-item">
-                        <h5>Opsi 2 (Cicilan 6 Bulan)</h5>
-                        <p>Biaya normal dibagi rata 6 kali tanpa bunga. DP bulan pertama dibayarkan di awal saat tanda tangan agreement.</p>
+
+                    <!-- Package 2 -->
+                    <div class="pkg-row">
+                        <button type="button" class="pkg-summary" aria-expanded="false">
+                            <span class="pkg-num">02</span>
+                            <span class="pkg-name">Signature Showcase</span>
+                            <span class="pkg-target">Eksekutif, konsultan, fotografer & kreator</span>
+                            <span class="pkg-price">Rp 4.750.000</span>
+                            <span class="pkg-icon">+</span>
+                        </button>
+                        <div class="pkg-detail">
+                            <div class="pkg-detail-inner">
+                                <ul class="pkg-features">
+                                    <li>Portofolio multi-section yang interaktif</li>
+                                    <li>Animasi kustom, horizontal scroll & sticky section</li>
+                                    <li>Form pemesanan via WhatsApp, tersinkron ke email</li>
+                                    <li>Setup profil dan SEO dasar</li>
+                                </ul>
+                                <div class="pkg-meta">
+                                    <p><span>Durasi</span>7–12 hari kerja</p>
+                                    <p><span>Cicilan</span>Rp 900.000 × 6 bulan</p>
+                                    <a href="#contact-brutalist" class="pkg-cta">Pilih paket ini &#8599;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Package 3 -->
+                    <div class="pkg-row">
+                        <button type="button" class="pkg-summary" aria-expanded="false">
+                            <span class="pkg-num">03</span>
+                            <span class="pkg-name">Enterprise Architecture</span>
+                            <span class="pkg-target">Perusahaan, lembaga, agensi & organisasi</span>
+                            <span class="pkg-price"><small>mulai</small> Rp 8.750.000</span>
+                            <span class="pkg-icon">+</span>
+                        </button>
+                        <div class="pkg-detail">
+                            <div class="pkg-detail-inner">
+                                <ul class="pkg-features">
+                                    <li>Website korporat multi-halaman</li>
+                                    <li>Form terhubung ke Google Sheets (SavanoirLeads) dengan notifikasi email</li>
+                                    <li>Email bisnis dengan domain sendiri, mis. contact@perusahaan.com</li>
+                                    <li>SEO teknis lanjutan dan Google Analytics</li>
+                                    <li>Maintenance 1 bulan setelah peluncuran</li>
+                                </ul>
+                                <div class="pkg-meta">
+                                    <p><span>Durasi</span>14–20 hari kerja</p>
+                                    <p><span>Cicilan</span>Rp 1.650.000 × 6 bulan</p>
+                                    <a href="#contact-brutalist" class="pkg-cta">Pilih paket ini &#8599;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Package 4: Custom System -->
+                    <div class="pkg-row">
+                        <button type="button" class="pkg-summary" aria-expanded="false">
+                            <span class="pkg-num">04</span>
+                            <span class="pkg-name">Custom System</span>
+                            <span class="pkg-target">Aplikasi SaaS / MIS untuk bisnis & lembaga</span>
+                            <span class="pkg-price">Sesuai ruang lingkup</span>
+                            <span class="pkg-icon">+</span>
+                        </button>
+                        <div class="pkg-detail">
+                            <div class="pkg-detail-inner">
+                                <ul class="pkg-features">
+                                    <li>Aplikasi web kustom sesuai alur kerja Anda</li>
+                                    <li>Pelacakan real-time dan otomatisasi proses</li>
+                                    <li>Hak akses bertingkat dan data yang terjaga</li>
+                                    <li>Dashboard dan laporan sesuai kebutuhan</li>
+                                </ul>
+                                <div class="pkg-meta">
+                                    <p><span>Durasi</span>Sesuai ruang lingkup</p>
+                                    <p><span>Harga</span>Setelah sesi konsultasi</p>
+                                    <a href="https://wa.me/62895095902557?text=Halo%20tim%20Savanoir,%20saya%20ingin%20konsultasi%20untuk%20sistem%20kustom." target="_blank" rel="noopener noreferrer" class="pkg-cta">Konsultasi gratis &#8599;</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <p class="pkg-note">Harga tercantum untuk pembayaran penuh. Tersedia cicilan 6 bulan tanpa bunga dengan harga normal (Rp 3.000.000, Rp 5.400.000, dan Rp 9.900.000); cicilan pertama dibayarkan saat penandatanganan perjanjian. Gunakan kode voucher jika ada promo event.</p>
             </div>
         </section>
 
@@ -411,43 +442,59 @@
         <section id="faq" class="faq-section">
             <div class="faq-container">
                 <div class="faq-header">
-                    <h2>Frequently Asked Questions</h2>
+                    <span class="section-label">FAQ</span>
+                    <h2>Pertanyaan yang sering diajukan</h2>
+                    <p>Belum terjawab? <a href="https://wa.me/62895095902557" target="_blank" rel="noopener noreferrer">Tanya langsung via WhatsApp &#8599;</a></p>
                 </div>
                 <div class="faq-list">
                     <div class="faq-item">
-                        <div class="faq-summary">
-                            <span>Berapa lama proses pembuatan website?</span>
+                        <button type="button" class="faq-summary">
+                            <span class="faq-num">01</span>
+                            <span class="faq-question">Berapa lama proses pembuatan website?</span>
                             <span class="faq-icon">+</span>
-                        </div>
+                        </button>
                         <div class="faq-answer">
                             <p>Waktu pengerjaan bergantung pada kompleksitas proyek, mulai dari 4–6 hari kerja untuk paket Present Esensial hingga 14–20 hari kerja untuk Enterprise Architecture. Untuk sistem aplikasi kustom (SaaS/MIS), jadwal disusun sesuai ruang lingkup proyek.</p>
                         </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-summary">
-                            <span>Apakah saya bisa mengelola konten sendiri?</span>
+                        <button type="button" class="faq-summary">
+                            <span class="faq-num">02</span>
+                            <span class="faq-question">Apakah bisa request fitur atau sistem di luar paket?</span>
                             <span class="faq-icon">+</span>
-                        </div>
+                        </button>
                         <div class="faq-answer">
-                            <p>Tentu. Untuk paket yang memerlukan *update* rutin, kami menyediakan sistem CMS yang mudah digunakan agar Anda bisa mengubah konten kapan saja.</p>
+                            <p>Bisa. Setiap paket dapat ditambah fitur sesuai kebutuhan. Untuk sistem aplikasi kustom (SaaS/MIS), kami menyusun penawaran berdasarkan ruang lingkup setelah sesi konsultasi.</p>
                         </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-summary">
-                            <span>Apakah biaya sudah termasuk domain dan hosting?</span>
+                        <button type="button" class="faq-summary">
+                            <span class="faq-num">03</span>
+                            <span class="faq-question">Apakah saya bisa mengelola konten sendiri?</span>
                             <span class="faq-icon">+</span>
-                        </div>
+                        </button>
                         <div class="faq-answer">
-                            <p>Ya, semua paket kami sudah mencakup biaya pendaftaran domain (.com/.id) dan hosting berkecepatan tinggi selama tahun pertama.</p>
+                            <p>Tentu. Untuk paket yang memerlukan update rutin, kami menyediakan sistem CMS yang mudah digunakan agar Anda bisa mengubah konten kapan saja.</p>
                         </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-summary">
-                            <span>Bagaimana jika saya butuh revisi desain?</span>
+                        <button type="button" class="faq-summary">
+                            <span class="faq-num">04</span>
+                            <span class="faq-question">Apakah biaya sudah termasuk domain dan hosting?</span>
                             <span class="faq-icon">+</span>
-                        </div>
+                        </button>
                         <div class="faq-answer">
-                            <p>Kami menyertakan slot revisi pada tahap *Blueprint* untuk memastikan desain 100% sesuai dengan ekspektasi Anda sebelum masuk ke tahap *Full Development*.</p>
+                            <p>Ya, semua paket website sudah mencakup biaya pendaftaran domain (.com/.id) dan hosting berkecepatan tinggi selama tahun pertama.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button type="button" class="faq-summary">
+                            <span class="faq-num">05</span>
+                            <span class="faq-question">Bagaimana jika saya butuh revisi desain?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Kami menyertakan slot revisi pada tahap Blueprint untuk memastikan desain 100% sesuai dengan ekspektasi Anda sebelum masuk ke tahap Full Development.</p>
                         </div>
                     </div>
                 </div>
@@ -515,41 +562,26 @@
             <div class="footer-container">
                 <!-- Identity Column -->
                 <div class="footer-identity">
-                    <h2 class="footer-logo">SAVANOIR.</h2>
-                    <p class="footer-tagline">"Website dan sistem digital untuk segala skala, dari perorangan hingga korporasi."</p>
+                    <span class="footer-label">Savanoir Studio</span>
+                    <p class="footer-tagline">Website dan sistem digital untuk segala skala, dari perorangan hingga korporasi.</p>
                     <div class="availability-badge">
                         <span class="dot"></span> Available for projects
                     </div>
+                    <div class="footer-contact">
+                        <a href="https://wa.me/62895095902557" target="_blank" rel="noopener noreferrer">WhatsApp Direct</a>
+                        <a href="mailto:contact@savanoir.com">contact@savanoir.com</a>
+                    </div>
                 </div>
 
-                <!-- Navigation Columns -->
-                <div class="footer-nav-grid">
-                    <div class="footer-col">
-                        <h4>Pameran/Layanan</h4>
-                        <ul>
-                            <li><a href="#works">Portofolio Pribadi</a></li>
-                            <li><a href="#services">Profil Perusahaan</a></li>
-                            <li><a href="#final-section">Alur Kerja & Proses</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-col">
-                        <h4>Perusahaan / Tentang Kami</h4>
-                        <ul>
-                            <li><a href="#">Tentang Savanoir</a></li>
-                            <li><a href="#packages">Harga / Permintaan Info</a></li>
-                            <li><a href="#faq">FAQ</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-col">
-                        <h4>Kontak Langsung</h4>
-                        <ul>
-                            <li><a href="https://wa.me/62895095902557" target="_blank">WhatsApp Direct</a></li>
-                            <li><a href="mailto:contact@savanoir.com">contact@savanoir.com</a></li>
-                        </ul>
-                    </div>
-                </div>
+                <!-- Navigation List -->
+                <nav class="footer-nav-list" aria-label="Footer">
+                    <a href="#services"><span class="footer-nav-text">Services</span><svg class="footer-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+                    <a href="#works"><span class="footer-nav-text">Works</span><svg class="footer-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+                    <a href="#final-section"><span class="footer-nav-text">Process</span><svg class="footer-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+                    <a href="#packages"><span class="footer-nav-text">Packages</span><svg class="footer-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+                    <a href="#faq"><span class="footer-nav-text">FAQ</span><svg class="footer-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+                    <a href="#contact-brutalist"><span class="footer-nav-text">Contact</span><svg class="footer-arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+                </nav>
             </div>
 
             <div class="footer-bottom">
