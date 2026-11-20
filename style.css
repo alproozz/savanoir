@@ -675,6 +675,18 @@ body {
     min-height: 50vh;
     margin-top: 1rem;
     overflow: hidden;
+    position: relative;
+}
+
+/* Halftone reveal (dibuat oleh main.js). Canvas menutupi gambar asli;
+   kalau WebGL tidak tersedia, canvas tidak dibuat dan gambar biasa tetap tampil. */
+.noir-halftone-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: crosshair;
 }
 
 .section-4-image {
@@ -1644,6 +1656,28 @@ body {
     color: #fff;
 }
 
+/* Status saat batas pengiriman per perangkat tercapai */
+.brutal-form button:disabled,
+.brutal-form button:disabled:hover {
+    background: transparent;
+    color: #888;
+    border-color: #bbb;
+    cursor: not-allowed;
+}
+
+.form-limit-note {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #555;
+}
+
+.form-limit-note a {
+    color: #ff0032;
+    text-decoration: none;
+    border-bottom: 1px solid #ff0032;
+}
+
 .brutal-clients-row .brutal-cell {
     display: flex;
     flex-direction: column;
@@ -1697,13 +1731,268 @@ body {
 /* =================================
    PACKAGES SECTION
 ================================= */
-.packages-section {
+/* =================================
+   TESTIMONIALS SECTION
+   Header asimetris + 2 baris marquee kartu yang bergulir otomatis.
+   Kartu flat (tanpa shadow/border), dipisahkan oleh kontras warna.
+================================= */
+.testi-section {
     background-color: #050505;
-    padding: 7rem 5%;
+    padding: 7rem 0;
     color: #fff;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-family: 'Outfit', sans-serif;
     position: relative;
     z-index: 10;
+    overflow: hidden;
+}
+
+.testi-header {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 3.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+}
+
+.testi-heading h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+}
+
+.testi-heading h2 span {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.testi-metric {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.testi-score {
+    font-size: clamp(3rem, 5.5vw, 4.5rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+}
+
+.testi-score-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.testi-score-note {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.testi-stars {
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    color: #ff0032;
+    line-height: 1;
+}
+
+/* Baris marquee: memanjang melewati tepi layar (bleed) */
+.testi-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.testi-row {
+    overflow: hidden;
+}
+
+/* Baris kedua digeser agar kartu tidak sejajar vertikal */
+.testi-row--offset {
+    margin-left: -180px;
+}
+
+.testi-track {
+    display: flex;
+    width: max-content;
+}
+
+.testi-track-left {
+    animation: testi-scroll-left 90s linear infinite;
+}
+
+.testi-track-right {
+    animation: testi-scroll-right 100s linear infinite;
+}
+
+/* Berhenti saat kursor di atas baris, supaya testimoni bisa dibaca */
+.testi-row:hover .testi-track {
+    animation-play-state: paused;
+}
+
+@keyframes testi-scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes testi-scroll-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+}
+
+/* Kartu */
+.testi-card {
+    width: 340px;
+    min-height: 220px;
+    margin: 0 16px 0 0;
+    padding: 26px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-shrink: 0;
+    background: #141414;
+    color: #fff;
+}
+
+.testi-card blockquote {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.testi-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.testi-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: #fff;
+    color: #050505;
+}
+
+.testi-who {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    font-size: 0.8rem;
+    line-height: 1.3;
+}
+
+.testi-who strong {
+    font-weight: 600;
+}
+
+.testi-who span {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Varian aksen: terang */
+.testi-card--light {
+    background: #f5f5f4;
+    color: #111;
+}
+
+.testi-card--light blockquote {
+    color: #111;
+}
+
+.testi-card--light .testi-avatar {
+    background: #050505;
+    color: #fff;
+}
+
+.testi-card--light .testi-who span {
+    color: rgba(17, 17, 17, 0.55);
+}
+
+/* Varian aksen: merah Savanoir */
+.testi-card--red {
+    background: #ff0032;
+}
+
+.testi-card--red blockquote {
+    color: #fff;
+}
+
+.testi-card--red .testi-stars {
+    color: #fff;
+}
+
+.testi-card--red .testi-avatar {
+    background: #fff;
+    color: #ff0032;
+}
+
+.testi-card--red .testi-who span {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+@media (max-width: 768px) {
+    .testi-section {
+        padding: 5rem 0;
+    }
+    .testi-header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 2.5rem;
+    }
+    .testi-card {
+        width: 280px;
+        min-height: 200px;
+        padding: 22px;
+    }
+    .testi-card blockquote {
+        font-size: 0.98rem;
+    }
+    .testi-row--offset {
+        margin-left: -140px;
+    }
+}
+
+/* Pengguna yang mematikan animasi: baris bisa digeser manual */
+@media (prefers-reduced-motion: reduce) {
+    .testi-track-left,
+    .testi-track-right {
+        animation: none;
+    }
+    .testi-row {
+        overflow-x: auto;
+    }
+    .testi-row--offset {
+        margin-left: 0;
+    }
+}
+
+.packages-section {
+    background-color: #ff0032;
+    padding: 7rem 5%;
+    color: #fff;
+    position: relative;
+    z-index: 10;
+}
+
+.packages-section .section-label {
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .packages-container {
@@ -1738,22 +2027,22 @@ body {
     margin-top: 1.5rem;
     font-size: 1.05rem;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .packages-sub strong {
     color: #fff;
     font-weight: 500;
-    border-bottom: 1px solid #ff0032;
+    border-bottom: 2px solid #050505;
 }
 
 /* Daftar paket: baris besar dengan garis pemisah, klik untuk detail */
 .pkg-list {
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .pkg-row {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .pkg-summary,
@@ -1781,7 +2070,7 @@ body {
     font-family: 'Outfit', sans-serif;
     font-size: 0.85rem;
     letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.75);
 }
 
 .pkg-name {
@@ -1799,7 +2088,7 @@ body {
     grid-area: target;
     font-size: 0.95rem;
     line-height: 1.5;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* Harga: cicilan per bulan sebagai angka utama */
@@ -1825,7 +2114,7 @@ body {
     margin-left: 0.15rem;
     font-size: 0.85rem;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .pkg-price-main .pkg-from {
@@ -1841,7 +2130,7 @@ body {
     font-size: 0.7rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: #ff0032;
+    color: #050505;
 }
 
 .pkg-icon {
@@ -1849,13 +2138,13 @@ body {
     justify-self: end;
     font-size: 1.5rem;
     font-weight: 300;
-    color: #ff0032;
+    color: #050505;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .pkg-summary:hover .pkg-name,
 .pkg-row.open .pkg-name {
-    color: #ff0032;
+    color: #050505;
 }
 
 .pkg-summary:hover .pkg-name {
@@ -1896,14 +2185,14 @@ body {
     padding-left: 1.5rem;
     font-size: 0.95rem;
     line-height: 1.5;
-    color: rgba(255, 255, 255, 0.75);
+    color: #fff;
 }
 
 .pkg-features li::before {
     content: "—";
     position: absolute;
     left: 0;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .pkg-meta {
@@ -1913,14 +2202,14 @@ body {
     align-items: flex-start;
     gap: 0.6rem;
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.75);
+    color: #fff;
 }
 
 .pkg-meta em {
     margin-left: 0.5rem;
     font-style: normal;
     font-size: 0.8rem;
-    color: #ff0032;
+    color: #050505;
 }
 
 .pkg-meta span {
@@ -1929,7 +2218,7 @@ body {
     font-size: 0.7rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .pkg-cta {
@@ -1940,13 +2229,13 @@ body {
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
-    border-bottom: 1px solid #ff0032;
+    border-bottom: 2px solid #050505;
     padding-bottom: 3px;
     transition: color 0.3s ease;
 }
 
 .pkg-cta:hover {
-    color: #ff0032;
+    color: #050505;
 }
 
 .pkg-note {
@@ -1954,7 +2243,7 @@ body {
     max-width: 680px;
     font-size: 0.85rem;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.85);
 }
 
 @media (max-width: 768px) {
