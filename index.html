@@ -56,39 +56,99 @@
 
         <!-- New Fintech Gen AI Section -->
         <section id="services" class="services">
-            <div class="services-header">
-                <h2>Digital Solutions for Every Scale</h2>
-                <p>From companies and communities to individuals, we build what you need.</p>
+            <div class="svc-header">
+                <div class="svc-header-left">
+                    <span class="svc-label">(Services) — 04</span>
+                    <h2 class="svc-title">
+                        <span class="svc-line"><span>Digital Solutions</span></span>
+                        <span class="svc-line"><span>for <em>Every Scale.</em></span></span>
+                    </h2>
+                </div>
+                <div class="svc-header-right">
+                    <p>From companies and communities to individuals, we build what you need.</p>
+                    <span class="svc-hint">Hover to explore <span aria-hidden="true">&rarr;</span></span>
+                </div>
             </div>
 
-            <div class="services-grid">
-                <div class="card card-main card-1">
-                    <div class="card-glow"></div>
-                    <img src="images/corporatebran.jpg" alt="Company Profile & Landing Page" class="card-image">
-                    <h3>Company Profiles</h3>
-                    <p>Company profiles and landing pages for companies, institutions, agencies, and brands, built to
-                        turn visitors into clients.</p>
-                </div>
-                <div class="card card-main card-2">
-                    <div class="card-glow"></div>
-                    <img src="images/profesionalport.jpg" alt="Personal Portfolio" class="card-image">
-                    <h3>Personal Portfolios</h3>
-                    <p>For individuals and creators: a personal portfolio or profile website that showcases your work
-                        with a distinctive look.</p>
-                </div>
-                <div class="card-column-stacked">
-                    <div class="card card-stacked card-stacked-top">
-                        <div class="card-glow"></div>
-                        <img src="images/aiintegration.jpg" alt="Custom Systems" class="card-image">
+            <!-- Panel melebar: panel aktif membesar & berganti otomatis (main.js) -->
+            <div class="svc-panels">
+                <article class="svc-panel is-active" tabindex="0">
+                    <img src="images/corporatebran.jpg" alt="Company Profile & Landing Page" class="svc-media">
+                    <span class="svc-shade" aria-hidden="true"></span>
+                    <span class="svc-progress" aria-hidden="true"></span>
+                    <span class="svc-num">01</span>
+                    <span class="svc-vertical" aria-hidden="true">Company Profiles</span>
+                    <div class="svc-content">
+                        <h3>Company Profiles</h3>
+                        <p>Company profiles and landing pages for companies, institutions, agencies, and brands, built to turn visitors into clients.</p>
+                        <ul class="svc-tags">
+                            <li>Company Profile</li>
+                            <li>Landing Page</li>
+                        </ul>
+                        <a href="#packages" class="svc-cta">See packages &#8599;</a>
+                    </div>
+                </article>
+
+                <article class="svc-panel" tabindex="0">
+                    <img src="images/profesionalport.jpg" alt="Personal Portfolio" class="svc-media">
+                    <span class="svc-shade" aria-hidden="true"></span>
+                    <span class="svc-progress" aria-hidden="true"></span>
+                    <span class="svc-num">02</span>
+                    <span class="svc-vertical" aria-hidden="true">Personal Portfolios</span>
+                    <div class="svc-content">
+                        <h3>Personal Portfolios</h3>
+                        <p>For individuals and creators: a personal portfolio or profile website that showcases your work with a distinctive look.</p>
+                        <ul class="svc-tags">
+                            <li>Portfolio</li>
+                            <li>Personal Website</li>
+                        </ul>
+                        <a href="#packages" class="svc-cta">See packages &#8599;</a>
+                    </div>
+                </article>
+
+                <article class="svc-panel" tabindex="0">
+                    <img src="images/aiintegration.jpg" alt="Custom Systems" class="svc-media">
+                    <span class="svc-shade" aria-hidden="true"></span>
+                    <span class="svc-progress" aria-hidden="true"></span>
+                    <span class="svc-num">03</span>
+                    <span class="svc-vertical" aria-hidden="true">Custom Systems</span>
+                    <div class="svc-content">
                         <h3>Custom Systems (SaaS / MIS)</h3>
                         <p>Adaptive applications for transparency and efficiency, from real-time tracking to full automation.</p>
+                        <ul class="svc-tags">
+                            <li>SaaS</li>
+                            <li>MIS</li>
+                            <li>Automation</li>
+                        </ul>
+                        <a href="#packages" class="svc-cta">See packages &#8599;</a>
                     </div>
-                    <div class="card card-stacked card-stacked-bottom">
-                        <div class="card-glow"></div>
-                        <h3>Privacy & Compliance</h3>
+                </article>
+
+                <article class="svc-panel svc-panel--privacy" tabindex="0">
+                    <!-- Visual tanpa foto: grid bergerak, gembok, dan garis pindai -->
+                    <div class="svc-media svc-media--grid" aria-hidden="true">
+                        <svg class="svc-lock" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="14" y="28" width="36" height="26" rx="3" />
+                            <path d="M22 28v-8a10 10 0 0 1 20 0v8" />
+                            <circle cx="32" cy="40" r="3" />
+                            <path d="M32 43v5" />
+                        </svg>
+                        <span class="svc-scan"></span>
+                    </div>
+                    <span class="svc-shade" aria-hidden="true"></span>
+                    <span class="svc-progress" aria-hidden="true"></span>
+                    <span class="svc-num">04</span>
+                    <span class="svc-vertical" aria-hidden="true">Privacy &amp; Compliance</span>
+                    <div class="svc-content">
+                        <h3>Privacy &amp; Compliance</h3>
                         <p>Closed, access-controlled data architecture aligned with GRC standards.</p>
+                        <ul class="svc-tags">
+                            <li>Access Control</li>
+                            <li>GRC</li>
+                        </ul>
+                        <a href="#contact-brutalist" class="svc-cta">Talk to us &#8599;</a>
                     </div>
-                </div>
+                </article>
             </div>
         </section>
 
@@ -297,56 +357,69 @@
             </div>
 
             <div class="gradient-reveal-bg"></div>
+            <!-- Cahaya lembut yang mengikuti kursor (posisi diatur main.js) -->
+            <div class="final-spotlight" aria-hidden="true"></div>
             <div class="gradient-content final-content">
-                <div class="final-header">
-                    <h2>Built to Adapt</h2>
-                    <p>From static websites to custom systems, engineered for every scale.</p>
-                </div>
-                
-                <div class="final-metrics">
-                    <div class="metric">
-                        <span class="metric-value">7-14 Days</span>
-                        <span class="metric-label">Turnaround</span>
+                <div class="final-inner">
+                    <div class="final-header">
+                        <div>
+                            <span class="final-label">(Process) — 4 Steps</span>
+                            <h2 class="final-title">
+                                <span class="final-line"><span>Built to</span></span>
+                                <span class="final-line"><span><em>Adapt.</em></span></span>
+                            </h2>
+                        </div>
+                        <p class="final-sub">From static websites to custom systems, engineered for every scale.</p>
                     </div>
-                    <div class="metric">
-                        <span class="metric-value">100%</span>
-                        <span class="metric-label">Mobile Responsive</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-value">SEO</span>
-                        <span class="metric-label">Ready</span>
-                    </div>
-                </div>
 
-                <div class="final-process">
-                    <h3>How We Work</h3>
-                    <div class="process-steps vertical">
-                        <div class="step-item">
-                            <div class="step-marker">01</div>
-                            <div class="step-content">
-                                <h4>Fondasi</h4>
-                                <p>Menyatukan kebutuhan, tujuan, dan arah estetika proyek.</p>
-                            </div>
+                    <!-- Angka menghitung naik saat konten muncul (main.js) -->
+                    <div class="final-metrics">
+                        <div class="metric">
+                            <span class="metric-value"><span data-count="7">7</span>–<span data-count="14">14</span><small>Days</small></span>
+                            <span class="metric-label">Turnaround</span>
                         </div>
-                        <div class="step-item">
-                            <div class="step-marker">02</div>
-                            <div class="step-content">
-                                <h4>Blueprint</h4>
-                                <p>Memetakan arsitektur sistem, tata letak, dan pengalaman pengguna.</p>
-                            </div>
+                        <div class="metric">
+                            <span class="metric-value"><span data-count="100">100</span><small>%</small></span>
+                            <span class="metric-label">Mobile Responsive</span>
                         </div>
-                        <div class="step-item">
-                            <div class="step-marker">03</div>
-                            <div class="step-content">
-                                <h4>Full Development</h4>
-                                <p>Perakitan website atau sistem aplikasi dengan standar modern dan presisi.</p>
-                            </div>
+                        <div class="metric">
+                            <span class="metric-value"><span data-scramble="SEO">SEO</span></span>
+                            <span class="metric-label">Ready</span>
                         </div>
-                        <div class="step-item">
-                            <div class="step-marker">04</div>
-                            <div class="step-content">
-                                <h4>Handover</h4>
-                                <p>Peluncuran karya digital ke publik dengan dukungan penuh.</p>
+                    </div>
+
+                    <div class="final-process">
+                        <h3>How We Work</h3>
+                        <!-- Garis timeline terisi mengikuti scroll; langkah menyala saat dilewati -->
+                        <div class="process-steps">
+                            <div class="process-line" aria-hidden="true"><span class="process-line-fill"></span></div>
+                            <div class="step-item">
+                                <div class="step-marker">01</div>
+                                <div class="step-content">
+                                    <h4>Fondasi</h4>
+                                    <p>Menyatukan kebutuhan, tujuan, dan arah estetika proyek.</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-marker">02</div>
+                                <div class="step-content">
+                                    <h4>Blueprint</h4>
+                                    <p>Memetakan arsitektur sistem, tata letak, dan pengalaman pengguna.</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-marker">03</div>
+                                <div class="step-content">
+                                    <h4>Full Development</h4>
+                                    <p>Perakitan website atau sistem aplikasi dengan standar modern dan presisi.</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-marker">04</div>
+                                <div class="step-content">
+                                    <h4>Handover</h4>
+                                    <p>Peluncuran karya digital ke publik dengan dukungan penuh.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
