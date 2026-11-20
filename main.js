@@ -907,6 +907,184 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // =====================================================
+// Built to Adapt (Process): angka menghitung naik, efek huruf acak "SEO",
+// garis timeline terisi mengikuti scroll, dan cahaya sorot mengikuti kursor.
+// (Animasi slat & gradient tetap ditangani kode di bagian atas file.)
+// =====================================================
+document.addEventListener("DOMContentLoaded", () => {
+    const section = document.getElementById('final-section');
+    const content = section && section.querySelector('.final-content');
+    if (!content) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // 1. Angka & huruf, dijalankan sekali saat konten muncul setelah animasi slat
+    const runCounters = () => {
+        content.querySelectorAll('[data-count]').forEach(el => {
+            const target = parseInt(el.dataset.count, 10);
+            if (reduceMotion || isNaN(target)) return;
+            const start = performance.now();
+            const tick = now => {
+                const t = Math.min(1, Math.max(0, (now - start - 400) / 1600));
+                el.textContent = Math.round(target * (1 - Math.pow(1 - t, 4)));
+                if (t < 1) requestAnimationFrame(tick);
+            };
+            el.textContent = '0';
+            requestAnimationFrame(tick);
+        });
+
+        const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&';
+        const randomChar = () => CHARS[Math.floor(Math.random() * CHARS.length)];
+        content.querySelectorAll('[data-scramble]').forEach(el => {
+            const finalText = el.dataset.scramble;
+            if (reduceMotion || !finalText) return;
+            const start = performance.now();
+            const tick = now => {
+                const t = (now - start - 600) / 1200;
+                const revealed = Math.floor(Math.min(1, Math.max(0, t)) * finalText.length);
+                el.textContent = finalText.split('').map((c, i) => (i < revealed ? c : randomChar())).join('');
+                if (t < 1) requestAnimationFrame(tick);
+                else el.textContent = finalText;
+            };
+            requestAnimationFrame(tick);
+        });
+    };
+
+    if (content.classList.contains('visible')) {
+        runCounters();
+    } else {
+        const watcher = new MutationObserver(() => {
+            if (content.classList.contains('visible')) {
+                watcher.disconnect();
+                runCounters();
+            }
+        });
+        watcher.observe(content, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    // 2. Timeline: garis terisi & langkah menyala mengikuti posisi scroll
+    const steps = content.querySelector('.process-steps');
+    const items = steps ? Array.from(steps.querySelectorAll('.step-item')) : [];
+    const line = steps && steps.querySelector('.process-line');
+    const scroller = document.getElementById('main-content');
+    const mobileQuery = window.matchMedia('(max-width: 768px)');
+
+    if (steps && items.length > 1 && scroller) {
+        const MARKER_CENTER = 22; // setengah tinggi penanda (45px)
+
+        const updateProgress = () => {
+            const vh = window.innerHeight;
+            let progress;
+            if (mobileQuery.matches) {
+                // Garis berhenti tepat di tengah penanda langkah terakhir
+                if (line) line.style.bottom = (items[items.length - 1].offsetHeight - MARKER_CENTER) + 'px';
+                // Vertikal: titik acuan di 65% tinggi layar
+                const anchor = vh * 0.65;
+                const first = items[0].getBoundingClientRect().top + MARKER_CENTER;
+                const last = items[items.length - 1].getBoundingClientRect().top + MARKER_CENTER;
+                progress = (anchor - first) / Math.max(1, last - first);
+                items.forEach(item => {
+                    item.classList.toggle('is-active', item.getBoundingClientRect().top + MARKER_CENTER <= anchor);
+                });
+            } else {
+                if (line) line.style.bottom = '';
+                // Horizontal: mulai saat timeline di 85% layar, penuh saat di 35%
+                progress = (vh * 0.85 - steps.getBoundingClientRect().top) / (vh * 0.5);
+                items.forEach((item, i) => {
+                    item.classList.toggle('is-active', progress >= i / (items.length - 1) - 0.001);
+                });
+            }
+            steps.style.setProperty('--progress', Math.min(1, Math.max(0, progress)).toFixed(3));
+        };
+
+        let ticking = false;
+        scroller.addEventListener('scroll', () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => { updateProgress(); ticking = false; });
+        }, { passive: true });
+        window.addEventListener('resize', updateProgress);
+    }
+
+    // 3. Cahaya sorot mengikuti kursor
+    if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
+        section.addEventListener('pointermove', event => {
+            const rect = section.getBoundingClientRect();
+            section.style.setProperty('--sx', (event.clientX - rect.left) + 'px');
+            section.style.setProperty('--sy', (event.clientY - rect.top) + 'px');
+        }, { passive: true });
+    }
+});
+
+// =====================================================
+// Services Section: panel melebar + pergantian otomatis.
+// Desktop: arahkan mouse ke panel untuk membukanya (autoplay berhenti selama mouse di atas panel).
+// HP: ketuk panel untuk membukanya (autoplay berhenti setelah pengguna memilih sendiri).
+// =====================================================
+document.addEventListener("DOMContentLoaded", () => {
+    const section = document.getElementById('services');
+    const wrap = section && section.querySelector('.svc-panels');
+    if (!wrap) return;
+    const panels = Array.from(wrap.querySelectorAll('.svc-panel'));
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canHover = window.matchMedia('(hover: hover)').matches;
+
+    const activate = panel => {
+        if (panel.classList.contains('is-active')) return;
+        panels.forEach(p => p.classList.toggle('is-active', p === panel));
+    };
+
+    const stopAutoplay = () => wrap.classList.remove('is-autoplay');
+
+    panels.forEach(panel => {
+        if (canHover) panel.addEventListener('mouseenter', () => activate(panel));
+        panel.addEventListener('click', () => {
+            if (!canHover) stopAutoplay();
+            activate(panel);
+        });
+        panel.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                stopAutoplay();
+                activate(panel);
+            }
+        });
+    });
+
+    // Judul besar naik dari balik mask saat section terlihat
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+        section.classList.add('is-revealed');
+    } else {
+        const revealObserver = new IntersectionObserver(entries => {
+            if (entries.some(entry => entry.isIntersecting)) {
+                section.classList.add('is-revealed');
+                revealObserver.disconnect();
+            }
+        }, { threshold: 0.25 });
+        revealObserver.observe(section);
+    }
+
+    // Pergantian otomatis: saat bar progres panel aktif penuh, pindah ke panel berikutnya
+    if (reduceMotion || !('IntersectionObserver' in window)) return;
+    wrap.classList.add('is-autoplay', 'is-paused');
+    panels.forEach((panel, i) => {
+        const bar = panel.querySelector('.svc-progress');
+        if (bar) bar.addEventListener('animationend', () => activate(panels[(i + 1) % panels.length]));
+    });
+
+    let visible = false;
+    let hovering = false;
+    const updatePause = () => wrap.classList.toggle('is-paused', !visible || hovering);
+    wrap.addEventListener('pointerenter', event => {
+        if (event.pointerType === 'mouse') { hovering = true; updatePause(); }
+    });
+    wrap.addEventListener('pointerleave', () => { hovering = false; updatePause(); });
+    new IntersectionObserver(entries => {
+        visible = entries.some(entry => entry.isIntersecting);
+        updatePause();
+    }, { threshold: 0.35 }).observe(wrap);
+});
+
+// =====================================================
 // Branding Section: teks latar bergerak, judul muncul bertahap,
 // badge melingkar ikut berputar saat scroll, dan parallax mouse pada kolase.
 // (Parallax scroll foto tetap ditangani handler scroll di bagian atas file.)
