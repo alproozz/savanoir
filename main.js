@@ -905,3 +905,77 @@ document.addEventListener("DOMContentLoaded", () => {
     if (img.complete && img.naturalWidth) start();
     else img.addEventListener('load', start, { once: true });
 });
+
+// =====================================================
+// Branding Section: teks latar bergerak, judul muncul bertahap,
+// badge melingkar ikut berputar saat scroll, dan parallax mouse pada kolase.
+// (Parallax scroll foto tetap ditangani handler scroll di bagian atas file.)
+// =====================================================
+document.addEventListener("DOMContentLoaded", () => {
+    const section = document.getElementById('branding');
+    if (!section) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // 1. Teks latar berulang. Dua salinan identik agar animasi -50% berulang mulus.
+    const column = section.querySelector('.brand-bg-column');
+    if (column && column.dataset.text) {
+        const track = document.createElement('div');
+        track.className = 'brand-bg-track';
+        for (let i = 0; i < 100; i++) {
+            const line = document.createElement('span');
+            line.textContent = column.dataset.text;
+            track.appendChild(line);
+        }
+        column.appendChild(track);
+    }
+    section.querySelectorAll('.brand-bg-row').forEach(row => {
+        if (!row.dataset.text) return;
+        const track = document.createElement('span');
+        track.className = 'brand-bg-track';
+        track.textContent = row.dataset.text.repeat(12);
+        row.appendChild(track);
+    });
+
+    // 2. Judul & sub-judul naik dari balik mask saat section mulai terlihat
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+        section.classList.add('is-revealed');
+    } else {
+        const revealObserver = new IntersectionObserver(entries => {
+            if (entries.some(entry => entry.isIntersecting)) {
+                section.classList.add('is-revealed');
+                revealObserver.disconnect();
+            }
+        }, { threshold: 0.3 });
+        revealObserver.observe(section);
+    }
+
+    // 3. Badge ikut berputar mengikuti scroll (di atas putaran konstan dari CSS)
+    const badgeSpin = section.querySelector('.brand-badge-spin');
+    const scroller = document.getElementById('main-content');
+    if (badgeSpin && scroller && !reduceMotion) {
+        let ticking = false;
+        scroller.addEventListener('scroll', () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                badgeSpin.style.transform = `rotate(${scroller.scrollTop * 0.25}deg)`;
+                ticking = false;
+            });
+        }, { passive: true });
+    }
+
+    // 4. Parallax mouse: tiap foto bergeser sesuai --depth masing-masing (lihat style.css)
+    if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
+        section.addEventListener('pointermove', event => {
+            const rect = section.getBoundingClientRect();
+            const mx = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            const my = ((event.clientY - rect.top) / rect.height) * 2 - 1;
+            section.style.setProperty('--mx', (-mx).toFixed(3));
+            section.style.setProperty('--my', (-my).toFixed(3));
+        }, { passive: true });
+        section.addEventListener('pointerleave', () => {
+            section.style.setProperty('--mx', '0');
+            section.style.setProperty('--my', '0');
+        });
+    }
+});
