@@ -7,7 +7,7 @@
     <title>Savanoir</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -94,9 +94,44 @@
 
         <!-- New Branding Section -->
         <section id="branding" class="branding-section">
-            <div class="branding-container">
-                <h2 class="branding-title">Branding Ur Self</h2>
+            <!-- Layer 1: teks latar pudar yang bergerak pelan (barisnya diisi oleh main.js) -->
+            <div class="brand-bg" aria-hidden="true">
+                <div class="brand-bg-column" data-text="Welcome to Savanoir — websites, systems &amp; identity for every scale —"></div>
+                <div class="brand-bg-rows">
+                    <div class="brand-bg-row" data-text="Savanoir Studio ✦ "></div>
+                    <div class="brand-bg-row brand-bg-row--reverse" data-text="Branding Ur Self ✦ "></div>
+                </div>
+            </div>
 
+            <div class="branding-container">
+                <!-- Layer 2: tipografi utama (muncul bertahap saat section terlihat) -->
+                <div class="branding-headline">
+                    <h2 class="branding-title">
+                        <span class="brand-line"><span>Branding</span></span>
+                        <span class="brand-line brand-line--indent"><span>Ur Self<em>.</em></span></span>
+                    </h2>
+                    <div class="branding-meta">
+                        <span class="brand-line"><span>A digital identity, built for every scale.</span></span>
+                        <span class="brand-line"><span class="branding-location">Bandung / Jakarta</span></span>
+                    </div>
+                </div>
+
+                <!-- Badge teks melingkar: berputar terus + ikut berputar saat di-scroll -->
+                <div class="brand-badge" aria-hidden="true">
+                    <div class="brand-badge-spin">
+                        <svg viewBox="0 0 200 200">
+                            <defs>
+                                <path id="brandBadgePath" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
+                            </defs>
+                            <text>
+                                <textPath href="#brandBadgePath" textLength="488" lengthAdjust="spacingAndGlyphs">BUILT FOR EVERY SCALE • WEBSITES • SYSTEMS • IDENTITY •</textPath>
+                            </text>
+                        </svg>
+                    </div>
+                    <img src="images/sava01.svg" class="brand-badge-logo" alt="">
+                </div>
+
+                <!-- Layer 3: kolase foto (parallax scroll dari main.js + parallax mouse) -->
                 <img src="images/Section301.jpg" class="brand-img img-1" data-speed="0.25" alt="Brand Image 1">
                 <img src="images/Section302.jpg" class="brand-img img-2" data-speed="-0.15" alt="Brand Image 2">
                 <img src="images/Section303.jpg" class="brand-img img-3" data-speed="0.35" alt="Brand Image 3">
