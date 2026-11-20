@@ -483,102 +483,300 @@ body {
     background-color: #1D1B1E;
     color: #FAF9F6;
     min-height: 100vh;
-    padding: 6rem 5% 2rem 5%;
+    /* padding bawah memberi ruang untuk marquee hijau (position: absolute) */
+    padding: 6rem 5% 8rem 5%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
+/* --- Layer 1: teks latar pudar yang bergerak pelan --- */
+.brand-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Kolom kiri: kalimat yang diulang dan bergulir ke atas */
+.brand-bg-column {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 5%;
+    width: 24%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent);
+}
+
+.brand-bg-column .brand-bg-track {
+    display: flex;
+    flex-direction: column;
+    animation: brand-bg-up 90s linear infinite;
+}
+
+.brand-bg-column span {
+    font-size: 0.8rem;
+    line-height: 1.9;
+    white-space: nowrap;
+    color: rgba(250, 249, 246, 0.07);
+}
+
+/* Baris tengah-kanan: teks besar bergaris tepi yang bergeser pelan */
+.brand-bg-rows {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.brand-bg-row {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.brand-bg-row .brand-bg-track {
+    display: inline-block;
+    font-size: clamp(4rem, 9vw, 9rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(250, 249, 246, 0.06);
+    animation: brand-bg-left 120s linear infinite;
+}
+
+.brand-bg-row--reverse .brand-bg-track {
+    animation-name: brand-bg-right;
+}
+
+@keyframes brand-bg-up {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+}
+
+@keyframes brand-bg-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes brand-bg-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+}
+
 .branding-container {
     position: relative;
-    height: 60vh;
+    z-index: 1;
+    height: max(440px, calc(100vh - 14rem));
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+}
+
+/* --- Layer 2: tipografi utama --- */
+.branding-headline {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    pointer-events: none;
 }
 
 .branding-title {
-    font-size: 4rem;
-    z-index: 10;
-    text-align: center;
-    color: #ffffff;
-    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 40px #ffffff;
-    padding: 20px;
-    background-color: transparent;
-    position: relative;
-    display: inline-block;
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(3.2rem, 10.5vw, 10rem);
+    font-weight: 800;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+    color: #FAF9F6;
+    white-space: nowrap;
 }
 
-.branding-title::before,
-.branding-title::after {
-    content: '';
+.branding-title em {
+    font-style: normal;
+    color: #ff0032;
+}
+
+/* Setiap baris dibungkus mask: isinya naik dari bawah saat section terlihat */
+.brand-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.04em;
+}
+
+.brand-line > span {
+    display: inline-block;
+    transform: translateY(110%);
+    transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-line--indent {
+    padding-left: 0.9em;
+}
+
+.branding-section.is-revealed .brand-line > span {
+    transform: translateY(0);
+}
+
+.branding-title .brand-line:nth-child(2) > span { transition-delay: 0.12s; }
+.branding-meta .brand-line:nth-child(1) > span { transition-delay: 0.28s; }
+.branding-meta .brand-line:nth-child(2) > span { transition-delay: 0.38s; }
+
+.branding-meta {
+    margin-top: 1.5rem;
+    padding-left: clamp(2.9rem, 9.45vw, 9rem); /* sejajar dengan indent baris kedua */
+    font-family: 'Outfit', sans-serif;
+}
+
+.branding-meta .brand-line > span {
+    font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+    font-weight: 300;
+    color: rgba(250, 249, 246, 0.55);
+}
+
+.branding-meta .branding-location {
+    margin-top: 0.6rem;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(250, 249, 246, 0.4) !important;
+}
+
+/* --- Badge teks melingkar --- */
+.brand-badge {
     position: absolute;
     top: 50%;
+    left: 1%;
+    width: clamp(110px, 11vw, 160px);
+    aspect-ratio: 1;
     transform: translateY(-50%);
-    width: 15vw; /* Lebar garis dinamis berdasarkan ukuran layar */
-    max-width: 300px;
-    height: 2px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    z-index: 20;
+    pointer-events: none;
 }
 
-.branding-title::before {
-    right: 100%;
-    background: linear-gradient(to left, rgba(255, 255, 255, 1), transparent);
+.brand-badge-spin {
+    width: 100%;
+    height: 100%;
+    will-change: transform; /* rotasi tambahan mengikuti scroll (main.js) */
 }
 
-.branding-title::after {
-    left: 100%;
-    background: linear-gradient(to right, rgba(255, 255, 255, 1), transparent);
+.brand-badge svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    animation: brand-badge-spin 22s linear infinite;
 }
 
+.brand-badge text {
+    fill: #FAF9F6;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.brand-badge-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 42%;
+    transform: translate(-50%, -50%);
+    filter: invert(1);
+}
+
+@keyframes brand-badge-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* --- Layer 3: kolase foto ---
+   `transform` dipakai parallax scroll (main.js), `translate` dipakai parallax mouse,
+   jadi keduanya tidak saling menimpa. --depth = seberapa jauh foto bergeser ikut mouse. */
 .brand-img {
     position: absolute;
     width: 160px;
     height: auto;
-    border-radius: 15px;
+    border-radius: 6px;
     object-fit: cover;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    transition: transform 0.1s ease-out;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    translate: calc(var(--mx, 0) * var(--depth, 20) * 1px) calc(var(--my, 0) * var(--depth, 20) * 1px);
+    transition: transform 0.1s ease-out, translate 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 5;
 }
 
-/* Initial scattered positions */
+/* Posisi tersebar asimetris; sebagian di atas judul (z-index 30), sebagian di bawah */
 /* 1. Pojok kiri atas */
 .img-1 {
-    top: 4%;
-    left: 1%;
+    top: 0;
+    left: 9%;
+    width: clamp(110px, 11vw, 170px);
+    --depth: 18;
 }
 
-/* 2. Tengah atas (kiri atas Title) */
+/* 2. Menumpuk di atas judul, kiri atas */
 .img-2 {
-    top: 15%;
-    left: 32%;
+    top: 8%;
+    left: 30%;
+    width: clamp(95px, 9.5vw, 145px);
+    z-index: 30;
+    --depth: 36;
 }
 
-/* 3. Kiri tengah */
+/* 3. Kiri bawah */
 .img-3 {
-    top: 43%;
-    left: 17%;
+    bottom: 0;
+    left: 16%;
+    width: clamp(120px, 12.5vw, 195px);
+    --depth: 24;
 }
 
 /* 4. Kanan atas */
 .img-4 {
-    top: 15%;
-    right: 3%
+    top: 2%;
+    right: 3%;
+    width: clamp(110px, 12vw, 180px);
+    --depth: 16;
 }
 
-/* 5. Kanan tengah (samping kanan Title) */
+/* 5. Menumpuk di atas judul, kanan */
 .img-5 {
-    top: 43%;
-    right: 18%
+    top: 46%;
+    right: 12%;
+    width: clamp(100px, 10vw, 155px);
+    z-index: 30;
+    --depth: 42;
 }
 
-/* 6. Bawah tengah (kanan bawah Title) */
+/* 6. Kanan bawah */
 .img-6 {
-    bottom: 12%;
-    left: 58%;
+    bottom: 2%;
+    right: 30%;
+    width: clamp(90px, 8.5vw, 135px);
+    --depth: 28;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .brand-bg-column .brand-bg-track,
+    .brand-bg-row .brand-bg-track,
+    .brand-badge svg {
+        animation: none;
+    }
+    .brand-line > span {
+        transform: none;
+        transition: none;
+    }
 }
 
 /* Marquee Text */
@@ -586,6 +784,7 @@ body {
     position: absolute;
     bottom: 0;
     left: 0;
+    z-index: 2; /* di atas kolase foto yang bergeser karena parallax */
     width: 100%;
     overflow: hidden;
     background-color: #c0ffa6;
@@ -702,7 +901,9 @@ body {
     position: relative;
     z-index: 10;
     width: 100%;
-    min-height: 200vh;
+    /* Sebelumnya 200vh: ada ruang kosong ~40vh antara bingkai teks dan gambar.
+       Sekarang gambar langsung mengisi bagian bawah bingkai (lihat .sec5-bottom). */
+    min-height: 100vh;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -791,10 +992,15 @@ body {
     position: relative;
     width: 100%;
     height: 60vh;
+    /* Ditarik ke atas agar gambar berada di dalam bingkai teks sejak awal
+       (bingkai .sec5-top tetap di atas gambar, z-index 20) */
+    margin-top: -60vh;
     display: flex;
     justify-content: space-between;
     align-items: flex-end; /* All images start aligned at the bottom */
     padding: 0;
+    /* Strip putih di bawah gambar supaya angka 02 / 00 / 02 tidak menimpa foto */
+    padding-bottom: 88px;
 }
 
 /* Container gambar: parallax (transform dari JS) + mengecil saat hover.
@@ -984,10 +1190,18 @@ body {
     .card { padding: 1.5rem; }
     
     /* Section 3: Branding */
-    .branding-section { padding: 4rem 5% 1rem 5%; }
-    .brand-img { width: 120px; }
+    .branding-section { padding: 4rem 5% 7rem 5%; }
+    .branding-container { height: max(460px, calc(100vh - 12rem)); }
+    .brand-img { width: 100px; }
+    .img-1 { left: 0; }
+    .img-2 { left: auto; right: 4%; top: 0; }
+    .img-3 { left: 0; width: 120px; }
+    .img-4 { display: none; }
     .img-5, .img-6 { display: none; }
-    .branding-title { font-size: 2.2rem; }
+    .branding-title { font-size: 3.4rem; }
+    .branding-meta { padding-left: 3.06rem; margin-top: 1rem; }
+    .brand-badge { top: auto; bottom: 4%; left: auto; right: 4%; transform: none; width: 96px; }
+    .brand-bg-column { display: none; }
 
     /* Section 4: Hero 2 */
     .section-4 { min-height: auto; padding-bottom: 2rem; }
@@ -1006,7 +1220,7 @@ body {
     .num-center-bottom { order: 2; }
     .num-right-top { order: -1; }
     .num-right-bottom { order: 2; }
-    .sec5-bottom { height: 40vh; display: flex; overflow-x: auto; gap: 15px; justify-content: flex-start; padding: 1rem; }
+    .sec5-bottom { height: 40vh; margin-top: 0; display: flex; overflow-x: auto; gap: 15px; justify-content: flex-start; padding: 1rem; }
     .sec5-img { width: 45%; flex-shrink: 0; }
 
     /* Gradient Reveal Section */
